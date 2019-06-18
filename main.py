@@ -12,7 +12,7 @@ P_W_IS_NEG = {}
 INTERESTING_WORDS = 50
 NEGATIVE_THRESHOLD = 0.98  # if review gets more = is negative
 UNSEEN = 0.4
-
+REVIEWS_FOR_EVALUATION = 200
 
 def get_count_of_word(word):
     count = 0
@@ -36,7 +36,8 @@ def populate_wp(total_pos_reviews):
 def populate_np(neg_coeff):
     for k, v in negative_words.items():
         if k in positive_words:
-            P_W_IS_NEG[k] = (P_WN[k]) / (P_WN[k] + P_WP[k])
+            # main naive bayes formula
+            P_W_IS_NEG[k] = (P_WN[k] * neg_coeff) / ((P_WN[k] * neg_coeff) + ((1-neg_coeff) * P_WP[k]))
         else:
             P_W_IS_NEG[k] = 0.99
 
@@ -61,8 +62,6 @@ def how_far_from_normal(word):
 
 def get_score_for_words(words):
     p_w = {}
-    words = sorted(words, key=how_far_from_normal, reverse=True)  # Sorting words by how far from middle (0.5) they are
-    words = words[:INTERESTING_WORDS]  # Taking only the most interesting words
     for word in words:
         if word in P_W_IS_NEG:
             p_w[word] = P_W_IS_NEG[word]
@@ -71,17 +70,17 @@ def get_score_for_words(words):
     neg_prob = 1
     for pn in p_w.values():
         neg_prob = neg_prob * pn
-    opp = 1
+    opposite_neg_prob = 1
     for p in p_w.values():
-        opp = opp * (1 - p)
-    if opp == 0:
+        opposite_neg_prob = opposite_neg_prob * (1 - p)
+    if opposite_neg_prob == 0:
         return 0
-    neg_prob = neg_prob / (neg_prob + opp)
+    neg_prob = neg_prob / (neg_prob + opposite_neg_prob)
     return neg_prob
 
 
 def read_and_populate_reviews(filename, populate_dictionary):
-    content = read_reviews_in_file(filename, 0, -200)
+    content = read_reviews_in_file(filename, 0, -REVIEWS_FOR_EVALUATION)
     for review in content:
         for word in review:
             if word in populate_dictionary:
@@ -107,8 +106,8 @@ def read_reviews_in_file(filename, start = 0, end = -1):
 
 
 def evaluate_naive_bayes():
-    neg_reviews = read_reviews_in_file("/rt-polaritydata/rt-polarity.neg", -200, -1)
-    pos_reviews = read_reviews_in_file("/rt-polaritydata/rt-polarity.pos", -200, -1)
+    neg_reviews = read_reviews_in_file("/rt-polaritydata/rt-polarity.neg", -REVIEWS_FOR_EVALUATION, -1)
+    pos_reviews = read_reviews_in_file("/rt-polaritydata/rt-polarity.pos", -REVIEWS_FOR_EVALUATION, -1)
     neg_evals = np.zeros((len(neg_reviews)), dtype=np.float)
     pos_evals = np.zeros((len(pos_reviews)), dtype=np.float)
 
@@ -122,6 +121,7 @@ def evaluate_naive_bayes():
     mse_neg = (np.square(neg_evals - np.ones(pos_evals.shape))).mean(axis=0)
     print("MSE for positive validation reviews: ", mse_pos)
     print("MSE for negative validation reviews: ", mse_neg)
+    print("MSE total: ", (mse_pos + mse_neg) / 2)
 
 
 def main():
