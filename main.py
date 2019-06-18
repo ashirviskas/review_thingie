@@ -2,6 +2,7 @@ import re
 import os
 import numpy as np
 from naive_bayes import NaiveBayes
+from logistic_regression import LogisticRegression
 
 negative_words = {}
 positive_words = {}
@@ -30,6 +31,8 @@ def main():
     pos_revs = read_reviews_in_file("/rt-polaritydata/rt-polarity.pos")
     nb = NaiveBayes(neg_revs, pos_revs, val_split=0.2)
     nb.evaluate_naive_bayes()
+    lr = LogisticRegression(neg_revs, pos_revs, val_split=0.2)
+    lr.evaluate_logistic_regression()
 
 
 if __name__ == "__main__":

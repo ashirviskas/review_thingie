@@ -129,7 +129,8 @@ class NaiveBayes:
         correct_predictions = np.concatenate((np.where(pos_evals < 0.5, 1, 0), np.where(neg_evals > 0.5, 1, 0))).sum()
         total_predictions = len(neg_evals) + len(pos_evals)
         print("Accuracy: ", correct_predictions / total_predictions)
-        print("MSE total: ", (mse_pos + mse_neg) / 2)
-        print("MSE for positive validation reviews: ", mse_pos)
-        print("MSE for negative validation reviews: ", mse_neg)
+        print()
+        # print("MSE total: ", (mse_pos + mse_neg) / 2)
+        # print("MSE for positive validation reviews: ", mse_pos)
+        # print("MSE for negative validation reviews: ", mse_neg)
         return correct_predictions / total_predictions
