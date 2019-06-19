@@ -30,7 +30,7 @@ Everything (source code, answers to questions, etc.) should be packed into singl
 ## Answers
 **Describe text processing pipeline you have selected.**
 
-For both methods, initial text processing removed all non english word characters. Recasing isn't done, because text is already lowercase.
+For both methods, initial text processing removed all non english word characters and split reviews into lists of words. Recasing isn't done, because text is already lowercase.
 
 For Naive Bayes words are then put to dictionaries as keys with values being the repetition of a certain word in the dataset.
 
