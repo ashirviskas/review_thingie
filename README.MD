@@ -44,12 +44,27 @@ No particular reason, it's just because they were given as example methods
 In my case, Naive Bayes was faster and more accurate. It didn't need long training like this particular logistic regression implementation did, which took more than a few minutes (9 minutes for 1000 epochs) versus a few seconds.
 
 ## Results
+
 Results were calculated using 20% of reviews as a validation set.
+
 **Naive Bayes result:**
 
- - Accuracy:  0.9154784240150093
+ - Accuracy:  0.915%
 
 **Logistic Regression result:**
-Model was trained for 1000 epochs.
 
- - Accuracy:  84.249
+**Implementation from scratch**
+
+Trained for 1000 epochs, 9 minutes:
+
+ - Accuracy:  84.249%
+
+Trained for 3000 epochs, 26 minutes:
+
+ - Accuracy: 89.54%
+
+ **Just for fun – implementation using Tensorflow**
+
+Trained for 200 epochs (10 minutes):
+
+ - Accuracy: 74.67%
