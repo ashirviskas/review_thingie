@@ -31,7 +31,7 @@ def main():
     pos_revs = read_reviews_in_file("/rt-polaritydata/rt-polarity.pos")
     nb = NaiveBayes(neg_revs, pos_revs, val_split=0.2)
     nb.evaluate_naive_bayes()
-    lr = LogisticRegression(neg_revs, pos_revs, val_split=0.2)
+    lr = LogisticRegression(neg_revs, pos_revs, val_split=0.2, lr=0.85, num_inter=1000)
     lr.evaluate_logistic_regression()
 
 

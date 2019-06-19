@@ -4,19 +4,25 @@ import random
 
 class NaiveBayes:
     def __init__(self, negative_reviews, positive_reviews, val_split=0.2):
-        self.negative_reviews = np.array(negative_reviews)
-        self.positive_reviews = np.array(positive_reviews)
-        self.P_WN = dict()
-        self.P_WP = dict()
-        self.P_W_IS_NEG = dict()
-        self.negative_words = dict()
-        self.positive_words = dict()
         self.INTERESTING_WORDS = 50
         self.NEGATIVE_THRESHOLD = 0.98  # if review gets more = is negative
         self.UNSEEN = 0.4
-        # self.val_split = val_split
-        # self.REVIEWS_FOR_EVALUATION = 200
-        # splitting train and validation sets:
+
+        self.negative_reviews = np.array(negative_reviews)
+        self.positive_reviews = np.array(positive_reviews)
+
+        # Probabilities of a word being in a negative dataset
+        self.P_WN = dict()
+
+        # Probabilities of a word being in a positive dataset
+        self.P_WP = dict()
+
+        # Probabilities of a word being negative
+        self.P_W_IS_NEG = dict()
+        self.negative_words = dict()
+        self.positive_words = dict()
+
+        # Splitting train and validation sets:
         self.negative_reviews_train, self.negative_reviews_val = self.split_train_val(self.negative_reviews, val_split)
         self.positive_reviews_train, self.positive_reviews_val = self.split_train_val(self.positive_reviews, val_split)
 
@@ -30,8 +36,6 @@ class NaiveBayes:
         self.populate_word_dicts(self.positive_reviews_train, self.positive_words)
 
         self.populate_probabilities(len(self.negative_reviews_train), len(self.negative_reviews_train))
-
-
 
     @staticmethod
     def populate_word_dicts(content, populate_dictionary):
@@ -69,6 +73,7 @@ class NaiveBayes:
         for k, v in self.positive_words.items():
             self.P_WP[k] = v / total_pos_reviews
 
+    # Calculating probabilities of words being in a review meaning that the review is negative
     def populate_np(self, neg_coeff):
         for k, v in self.negative_words.items():
             if k in self.positive_words:
@@ -93,6 +98,7 @@ class NaiveBayes:
         else:
             return 0.5 - self.UNSEEN
 
+    # Calculating words list probability of being a negative review
     def get_score_for_words(self, words):
         p_w = {}
         for word in words:
@@ -111,6 +117,7 @@ class NaiveBayes:
         neg_prob = neg_prob / (neg_prob + opposite_neg_prob)
         return neg_prob
 
+    # Evaluating Naive Bayes method accuracy
     def evaluate_naive_bayes(self):
         print("Native bayes evaluation")
         neg_reviews = self.negative_reviews_val

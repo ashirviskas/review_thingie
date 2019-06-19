@@ -33,7 +33,7 @@ For both methods, initial text processing removed all non word characters. Recas
 
 For Naive Bayes this is all that was done, tokenizing wasn't implemented.
 
-For Logistic Regression words were tokenized to simple integer indices. Then each review is converted to a vectorized representation matrix of if-idf values for each word that is later used for training and evaluating.
+For Logistic Regression words were tokenized to simple integer indices. Then each review is converted to a vectorized representation matrix consisting of counts of words. It is later used for training and evaluating.
 
 **Why you have selected these two classification methods?**
 
@@ -41,13 +41,15 @@ No particular reason, it's just because they were given as example methods
 
 **Compare selected classification methods. Which one is better? Why?**
 
-Idk yet lol
+In my case, Naive Bayes was faster and more accurate. It didn't need long training like this particular logistic regression implementation did, which took more than a few minutes (9 minutes for 1000 epochs) versus a few seconds.
 
 ## Results
 Results were calculated using 20% of reviews as a validation set.
 **Naive Bayes result:**
 
  - Accuracy:  0.9154784240150093
- - MSE total:  0.20090065595346646
 
 **Logistic Regression result:**
+Model was trained for 1000 epochs.
+
+ - Accuracy:  84.249
