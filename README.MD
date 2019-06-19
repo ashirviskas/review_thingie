@@ -38,7 +38,7 @@ For Logistic Regression words were then tokenized to simple integer indices. The
 
 **Why you have selected these two classification methods?**
 
-No particular reason, it's just because they were given as example methods
+No particular reason, it's just because they were given as example methods.
 
 **Compare selected classification methods. Which one is better? Why?**
 
