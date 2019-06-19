@@ -42,8 +42,8 @@ No particular reason, it's just because they were given as example methods
 
 **Compare selected classification methods. Which one is better? Why?**
 
-In my case, Naive Bayes was faster and more accurate. It didn't need long training like this particular logistic regression implementation did, which took more than a few minutes (9 minutes for 1000 epochs) versus just a few seconds using Naive Bayes method.
-Logistic regression is favorable when high accuracy is valued over training time which is generally a case with discriminative learning (http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf).
+In my case, Naive Bayes was faster and more accurate. It didn't need long training like this particular logistic regression implementation did, which took more than a few minutes (26 minutes for 3000 epochs) to get a decent result versus just a few seconds using Naive Bayes method.
+Logistic regression is favorable when high accuracy is valued over training time which is generally the case with discriminative learning (http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf).
 
 If I wanted a quick evaluation, I would use Naive Bayes method, as it is quite accurate and fast, but if I had more time and computing power, I would compare these both methods and use the one that is better suited for the particular task.
 
