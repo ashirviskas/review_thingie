@@ -70,6 +70,6 @@ Trained for 3000 epochs, 26 minutes:
 
  **Just for fun – implementation using Tensorflow:**
 
-Trained for 200 epochs (10 minutes):
+Trained for 200 epochs, 10 minutes:
 
  - Accuracy: 74.67%
