@@ -17,7 +17,7 @@ def regex_words_out_of_line(line):
 
 def read_reviews_in_file(filename, start=0, end=-1):
     content = list()
-    with open(os.path.dirname(__file__) + filename, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(filename, 'r', encoding='utf-8', errors='ignore') as f:
         for line in f:
             word_list = regex_words_out_of_line(line)  # re.findall(r"[A-Za-z0-9_$\'\"]+", line)#line.split()
             content.append(word_list)
@@ -27,8 +27,8 @@ def read_reviews_in_file(filename, start=0, end=-1):
 
 
 def main():
-    neg_revs = read_reviews_in_file("/rt-polaritydata/rt-polarity.neg")
-    pos_revs = read_reviews_in_file("/rt-polaritydata/rt-polarity.pos")
+    neg_revs = read_reviews_in_file("./rt-polaritydata/rt-polarity.neg")
+    pos_revs = read_reviews_in_file("./rt-polaritydata/rt-polarity.pos")
     nb = NaiveBayes(neg_revs, pos_revs, val_split=0.2)
     nb.evaluate_naive_bayes()
     lr = LogisticRegression(neg_revs, pos_revs, val_split=0.2, lr=0.85, num_inter=1000)
