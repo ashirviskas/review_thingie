@@ -34,8 +34,8 @@ def main():
     lr = LogisticRegression(neg_revs, pos_revs, val_split=0.2, lr=0.85, num_inter=1000)
     lr.evaluate_logistic_regression()
     # Just for fun – tensorflow
-    # lr_tf = LogisticRegression_tf(neg_revs, pos_revs, val_split=0.2, lr=0.01, num_inter=200)
-
+    lr_tf = LogisticRegression_tf(neg_revs, pos_revs, val_split=0.2, lr=0.01, num_inter=200)
+    lr_tf.evaluate_logistic_regression()
 
 if __name__ == "__main__":
     main()
