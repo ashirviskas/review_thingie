@@ -54,7 +54,7 @@ Results were calculated using 20% of reviews as a validation set.
 
 **Naive Bayes result:**
 
- - Accuracy:  0.915%
+ - Accuracy:  73.0%
 
 **Logistic Regression result:**
 
@@ -62,14 +62,14 @@ Results were calculated using 20% of reviews as a validation set.
 
 Trained for 1000 epochs, 9 minutes:
 
- - Accuracy:  84.249%
+ - Accuracy:  75.6%
 
 Trained for 3000 epochs, 26 minutes:
 
- - Accuracy: 89.54%
+ - Accuracy: 76.7%
 
  **Just for fun – implementation using Tensorflow:**
 
 Trained for 200 epochs, 10 minutes:
 
- - Accuracy: 74.67%
+ - Accuracy: 72.7%

@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 
 class LogisticRegression:
@@ -13,8 +14,8 @@ class LogisticRegression:
         self.positive_reviews = np.array(positive_reviews)
 
         # Splitting review data for training and testing
-        self.pos_rev_train, self.pos_rev_test = self.split_train_val(self.positive_reviews, val_split=val_split)
-        self.neg_rev_train, self.neg_rev_test = self.split_train_val(self.negative_reviews, val_split=val_split)
+        self.neg_rev_train, self.neg_rev_test = train_test_split(self.negative_reviews, test_size=val_split)
+        self.pos_rev_train, self.pos_rev_test = train_test_split(self.positive_reviews, test_size=val_split)
 
         # Concatenating negative and positive review data
         self.all_rev_train = np.concatenate((self.neg_rev_train, self.pos_rev_train))

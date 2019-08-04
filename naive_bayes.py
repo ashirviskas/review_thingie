@@ -1,6 +1,6 @@
 import numpy as np
 import random
-
+from sklearn.model_selection import train_test_split
 
 class NaiveBayes:
     def __init__(self, negative_reviews, positive_reviews, val_split=0.2):
@@ -23,8 +23,8 @@ class NaiveBayes:
         self.positive_words = dict()
 
         # Splitting train and validation sets:
-        self.negative_reviews_train, self.negative_reviews_val = self.split_train_val(self.negative_reviews, val_split)
-        self.positive_reviews_train, self.positive_reviews_val = self.split_train_val(self.positive_reviews, val_split)
+        self.negative_reviews_train, self.negative_reviews_val = train_test_split(self.negative_reviews, test_size=val_split)
+        self.positive_reviews_train, self.positive_reviews_val = train_test_split(self.positive_reviews, test_size=val_split)
 
         self.populate_everything()
 
