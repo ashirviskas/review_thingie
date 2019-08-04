@@ -11,7 +11,6 @@ P_WN = {}
 P_WP = {}
 P_W_IS_NEG = {}
 
-
 def regex_words_out_of_line(line):
     return re.findall(r"[a-z0-9_$\']+", line)
 
